@@ -87,6 +87,43 @@
   .pop-name{font-family:"Caveat",cursive;font-weight:700;font-size:1.35rem;line-height:1.05;margin:2px 0 4px;}
   .pop-why{font-size:.82rem;line-height:1.4;font-style:italic;color:var(--ink);margin-bottom:3px;}
   .pop-note{font-size:.8rem;line-height:1.4;color:var(--soft);}
+  /* ---- FAQ page ---- */
+  #faq{
+    position:fixed;inset:0;z-index:2500;background:var(--paper);
+    display:none;flex-direction:column;overflow-y:auto;
+    padding:calc(20px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));
+  }
+  #faq.show{display:flex;}
+  #faq h2{
+    font-family:"Caveat",cursive;font-weight:700;font-size:2rem;
+    text-align:center;line-height:1.1;
+  }
+  #faq .sub{text-align:center;font-size:.8rem;color:var(--soft);margin:4px 0 16px;}
+  .qa{margin:0 0 22px;}
+  .qa h3{
+    font-family:"Caveat",cursive;font-weight:700;font-size:1.6rem;line-height:1.15;
+    margin-bottom:5px;
+  }
+  .qa p{font-size:.88rem;line-height:1.6;margin-bottom:9px;}
+  .qa p:last-child{margin-bottom:0;}
+  .qa + .qa{border-top:1.5px dashed var(--line);padding-top:18px;}
+  .say{margin:0 0 10px;font-size:.88rem;line-height:1.5;}
+  .say .nl{font-family:"Caveat",cursive;font-weight:700;font-size:1.3rem;display:block;}
+  .say .sd{color:var(--soft);font-size:.8rem;}
+  #toMap{
+    display:block;margin:10px auto 0;font:inherit;font-weight:700;font-size:.92rem;
+    color:#FFFDF7;background:var(--d1);border:none;border-radius:999px;
+    padding:12px 26px;cursor:pointer;
+  }
+  #faqBtn{
+    position:absolute;top:12px;right:14px;z-index:5;
+    width:30px;height:30px;border-radius:50%;
+    border:1.5px dashed var(--soft);background:var(--card);color:var(--soft);
+    font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
+  }
+  .pop-lf{font-size:.78rem;line-height:1.4;margin-top:5px;color:var(--ink);
+    background:var(--paper);border-radius:8px;padding:6px 8px;}
+
   .pop-book{display:inline-block;margin-top:6px;font-size:.7rem;font-weight:800;
     background:#F6E3B4;color:#7A5200;border-radius:6px;padding:2px 8px;transform:rotate(-1.5deg);}
   .pop-dir{display:inline-block;margin-top:8px;font-size:.8rem;font-weight:700;
@@ -246,9 +283,54 @@
 
 
 <header>
+  <button id="faqBtn" aria-label="Amsterdam FAQ">?</button>
   <h1>Amsterdam <span class="heart">♥</span> 18–21 Sep</h1>
   <p>our little four-day adventure, tap a day to dive in ♪</p>
 </header>
+
+<div id="faq" role="dialog" aria-label="Amsterdam FAQ">
+  <h2>Before you wander...</h2>
+  <p class="sub">five little questions Amsterdam will make you ask</p>
+
+  <section class="qa">
+    <h3>Why all the canals?</h3>
+    <p>Amsterdam sits on a waterlogged peat bog, so the first ditches were dug simply to drain the marsh and defend the town. The famous ring came later, around 1600, when Golden Age trade money exploded and the city planned three grand crescents: Herengracht, Keizersgracht and Prinsengracht.</p>
+    <p>They were the highways of their day. Goods sailed from the harbour by barge right to the merchant's front door, which is why every house has a hoisting hook on its gable. Your driveway, loading dock and status symbol, all in one. It's arguably history's first piece of modern urban planning, and the whole ring is UNESCO-listed.</p>
+  </section>
+
+  <section class="qa">
+    <h3>Why tulips?</h3>
+    <p>Tulips aren't Dutch at all. They arrived from the Ottoman Empire in the late 1500s, and a Leiden botanist found they loved the sandy reclaimed soil. Within decades they became a luxury craze: in the 1630s single rare bulbs traded for the price of a canal house, until the market crashed overnight in 1637, history's first speculative bubble.</p>
+    <p>The obsession stuck. The Netherlands now grows around 2 billion tulips a year, and the floating Flower Market you'll stroll through on Sunday is its little descendant.</p>
+  </section>
+
+  <section class="qa">
+    <h3>What's with the flags?</h3>
+    <p>You'll see two. The red, white and blue tricolour is the Dutch national flag, one of the oldest tricolours in the world. It began as the orange, white and blue banner of William of Orange, the revolt leader against Spain, but orange dye faded badly at sea, so red took over. Orange survives as the royal colour, which is why the country dresses in it on King's Day.</p>
+    <p>The one on every bollard, bridge and souvenir is the city flag: three white X's on red and black. They're St Andrew's crosses from a medieval knightly family's coat of arms, though locals prefer the legend that they stand for the city's three old enemies, water, fire and plague.</p>
+  </section>
+
+  <section class="qa">
+    <h3>Why so many bicycles?</h3>
+    <p>Flat land and narrow medieval streets help, but the real answer is a choice. By the 1970s cars were taking over and hundreds of children were dying on the roads each year. A protest movement called Stop de Kindermoord, stop the child murder, pushed the country to rebuild its streets around bikes instead.</p>
+    <p>Today Amsterdam has more bicycles than people, and around 12,000 a year are fished out of the canals. Survival tip for this week: the bike lane is red, it belongs to them, and they will not stop.</p>
+  </section>
+
+  <section class="qa">
+    <h3>How do we say hello?</h3>
+    <p>Everyone in Amsterdam speaks excellent English, so none of this is needed. Try it anyway, people light up when you do.</p>
+    <p class="say"><span class="nl">Hoi</span><span class="sd">"hoy" &middot; hi, the one you'll hear most</span></p>
+    <p class="say"><span class="nl">Goedemorgen</span><span class="sd">"KHOO-de-MOR-khen" &middot; good morning, that kh is a throaty sound, lean into it</span></p>
+    <p class="say"><span class="nl">Dank je</span><span class="sd">"DANK yuh" &middot; thanks. Dank u wel is the polite version, dankjewel the warm one</span></p>
+    <p class="say"><span class="nl">Alsjeblieft</span><span class="sd">"ALS-yuh-BLEEFT" &middot; please, and also here you go when handing something over</span></p>
+    <p class="say"><span class="nl">Proost</span><span class="sd">"prohst" &middot; cheers. Look each other in the eye when you clink</span></p>
+    <p class="say"><span class="nl">Lekker</span><span class="sd">"LEK-ker" &middot; delicious, the most useful word of your trip</span></p>
+    <p class="say"><span class="nl">Tot ziens</span><span class="sd">"tot zeens" &middot; goodbye, save it for Monday</span></p>
+    <p>One more, because you'll hear it constantly: gezellig, roughly "khe-ZELL-ikh". It has no English equivalent. Cosy, convivial, the warm feeling of good company in a small candlelit bar. If a night out feels perfect, it was gezellig.</p>
+  </section>
+
+  <button id="toMap">on to the map ›</button>
+</div>
 
 <div class="tabs" id="tabs" role="tablist"></div>
 <div id="map" role="application" aria-label="Itinerary map"></div>
@@ -479,6 +561,7 @@ function showDay(i){
         <div class="pop-name">${idx+1}. ${s.n}</div>
         ${s.why?`<div class="pop-why">${s.why}</div>`:''}
         <div class="pop-note">${s.d}</div>
+        ${s.lf?`<div class="pop-lf">👀 ${s.lf}</div>`:''}
         ${s.book?'<span class="pop-book">book ahead ♡</span>':''}
         <br><a class="pop-dir" href="${gmapsPlace(s.q)}" target="_blank" rel="noopener">open in Google Maps ↗</a>
       </div>`,
@@ -555,6 +638,7 @@ showOverview();
   const stamp = document.getElementById('stamp');
   const enter = document.getElementById('enter');
   const cover = document.getElementById('cover');
+  const faq = document.getElementById('faq');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   lines.forEach((line,li)=>{
@@ -580,7 +664,15 @@ showOverview();
 
   enter.addEventListener('click',()=>{
     cover.classList.add('gone');
-    setTimeout(()=>{cover.remove(); map.invalidateSize();}, 650);
+    faq.classList.add('show');
+    setTimeout(()=>{cover.remove();}, 650);
+  });
+  document.getElementById('toMap').addEventListener('click',()=>{
+    faq.classList.remove('show');
+    map.invalidateSize();
+  });
+  document.getElementById('faqBtn').addEventListener('click',()=>{
+    faq.classList.add('show');
   });
 })();
 
