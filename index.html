@@ -276,7 +276,8 @@ const DAYS = [
       {t:"17:00", n:"Ferry to A'DAM Tower", d:"Free ferry from behind Centraal", q:"A'DAM Lookout Amsterdam", lat:52.3841, lng:4.9024},
       {t:"17:20", n:"Over The Edge swing", d:"On the rooftop lookout, then a drink up top", q:"A'DAM Lookout Amsterdam", why:"Europe's highest swing, out over the edge with the whole city below your feet", lat:52.3841, lng:4.9024, book:true},
       {t:"18:30", n:"Moon", d:"Booked, sunset around 19:40 mid-rotation", q:"Restaurant Moon Amsterdam", why:"A revolving dining room, one full turn of Amsterdam over four courses at sunset", lat:52.3841, lng:4.9021},
-      {t:"21:00", n:"Back to DoubleTree", d:"Ferry home, 10 min door to door", q:"DoubleTree by Hilton Amsterdam Centraal Station", lat:52.3766, lng:4.9061}
+      {t:"21:15", n:"Pllek nightcap (optional)", d:"Ferry to Centraal, then the NDSM ferry, check last boat back", q:"Pllek Amsterdam", why:"Kiri's outdoor bar on the old shipyard, fire pits and beach chairs by night", lat:52.4013, lng:4.8945},
+      {t:"23:00", n:"Back to DoubleTree", d:"NDSM ferry to Centraal, 5-min walk", q:"DoubleTree by Hilton Amsterdam Centraal Station", lat:52.3766, lng:4.9061}
     ]
   },
   {
@@ -288,6 +289,39 @@ const DAYS = [
       {t:"10:00", n:"Zaanse Schans", d:"Windmills, cheese farm, clog workshop", q:"Zaanse Schans", why:"Working 18th-century windmills on the river Zaan, the Holland of postcards", lat:52.4741, lng:4.8177},
       {t:"12:30", n:"De Kraai", d:"Poffertjes + savoury pancakes", q:"Pannenkoekenrestaurant De Kraai Zaanse Schans", why:"Fluffy mini pancakes in the middle of the windmill village", lat:52.4731, lng:4.8163},
       {t:"15:00", n:"Hotel, collect bags", d:"Depart 18:00, tot ziens Amsterdam ♥", q:"DoubleTree by Hilton Amsterdam Centraal Station", lat:52.3766, lng:4.9061}
+    ]
+  },
+  {
+    name:"Extras ♡", full:"in case you're in the area", color:"#B85F9E", extras:true,
+    stops:[
+      {t:"eat", e:"🍴", n:"Pancake Bakery", d:"Prinsengracht, by Anne Frank House", q:"The Pancake Bakery Amsterdam", why:"The backup if Upstairs' four tables beat you, canal-cellar pancakes", lat:52.3758, lng:4.8843},
+      {t:"eat", e:"🍴", n:"Vleminckx", d:"Voetboogstraat, by Spui", q:"Vleminckx Sausmeesters Amsterdam", why:"The famous fries queue since 1957, order oorlog sauce", lat:52.3679, lng:4.8898},
+      {t:"eat", e:"🍴", n:"Cafe Papeneiland", d:"Brouwersgracht corner, near Winkel 43", q:"Cafe Papeneiland Amsterdam", why:"A 1642 brown cafe where Bill Clinton queued for the apple pie", lat:52.3808, lng:4.8867},
+      {t:"eat", e:"🍴", n:"Cafe Bern", d:"Nieuwmarkt", q:"Cafe Bern Amsterdam", why:"The beloved cheese fondue institution, cosy on a cold night", lat:52.3723, lng:4.9003},
+      {t:"eat", e:"🍴", n:"Wynand Fockink", d:"Pijlsteeg, hidden behind Dam Square", q:"Wynand Fockink Amsterdam", why:"A 1679 jenever tasting house, glasses filled to the brim so you bow for the first sip", lat:52.3722, lng:4.8946},
+      {t:"eat", e:"🍴", n:"Sky Lounge", d:"Rooftop of your own hotel", q:"Sky Lounge Amsterdam DoubleTree", why:"Zero-commute sunset cocktails over the harbour", lat:52.3766, lng:4.9061},
+      {t:"eat", e:"🍴", n:"Brouwerij 't IJ", d:"Funenkade, east, terrace closes 20:00", q:"Brouwerij het IJ Amsterdam", why:"Beer brewed under the De Gooyer windmill", lat:52.3667, lng:4.9264},
+      {t:"eat", e:"🍴", n:"Foodhallen", d:"West, tram 17", q:"Foodhallen Amsterdam", why:"Indoor food hall with 20 stalls, the rainy-day wildcard", lat:52.3676, lng:4.8686},
+      {t:"photo", e:"📷", n:"Seven Bridges view", d:"Reguliersgracht at Herengracht", q:"Reguliersgracht seven bridges Amsterdam", why:"Seven canal arches lined up in a row, magic at dusk", lat:52.3637, lng:4.8955},
+      {t:"photo", e:"📷", n:"Magere Brug", d:"The Skinny Bridge, over the Amstel", q:"Magere Brug Amsterdam", why:"The city's most romantic bridge, lit with bulbs at night", lat:52.3637, lng:4.9021},
+      {t:"photo", e:"📷", n:"Brouwersgracht", d:"2 min from Winkel 43", q:"Brouwersgracht Amsterdam", why:"Regularly voted Amsterdam's most beautiful canal, houseboats and old warehouses", lat:52.3806, lng:4.8850},
+      {t:"photo", e:"📷", n:"NEMO rooftop", d:"10-min walk from the hotel, free", q:"NEMO Science Museum roof terrace Amsterdam", why:"A free panorama terrace over the whole old city", lat:52.3738, lng:4.9123},
+      {t:"photo", e:"📷", n:"Damrak dancing houses", d:"2 min from your door", q:"Damrak dancing houses Amsterdam", why:"The crooked waterfront row on every postcard", lat:52.3752, lng:4.8985},
+      {t:"photo", e:"📷", n:"Westerkerk bridge view", d:"Prinsengracht bridge by Anne Frank", q:"Westerkerk Amsterdam", why:"The classic tower-over-canal shot, and the bells Anne Frank wrote about", lat:52.3745, lng:4.8830},
+      {t:"see", e:"✨", n:"Our Lord in the Attic", d:"De Wallen, 45 min", q:"Ons' Lieve Heer op Solder Amsterdam", why:"A complete secret church hidden in a 1663 canal-house attic", lat:52.3760, lng:4.8977},
+      {t:"see", e:"✨", n:"Oudemanhuispoort", d:"Passage near Pancakes Upstairs, daytime", q:"Oudemanhuispoort book market Amsterdam", why:"A covered passage of second-hand book stalls, unchanged for a century", lat:52.3686, lng:4.8946},
+      {t:"eat", e:"🍴", n:"NNea", d:"Oud-West, books up in advance", q:"NNea pizza Amsterdam", why:"Kiri's pick, widely rated Amsterdam's best Naples-style pizza", lat:52.3690, lng:4.8690},
+      {t:"eat", e:"🍴", n:"Pesca", d:"Rozengracht, near Moeders", q:"Pesca Amsterdam", why:"Kiri's pick, market-style seafood, choose your fish then how it's cooked", lat:52.3728, lng:4.8768},
+      {t:"eat", e:"🍴", n:"Pastaria", d:"De Pijp", q:"Pastaria Amsterdam", why:"Kiri's pick for fresh handmade pasta", lat:52.3554, lng:4.8926},
+      {t:"eat", e:"🍴", n:"Coffee & Coconuts", d:"De Pijp, brunch", q:"Coffee and Coconuts Amsterdam", why:"Kiri's brunch pick, a three-floor former cinema", lat:52.3542, lng:4.8930},
+      {t:"eat", e:"🍴", n:"The Butcher Social Club", d:"Base of the A'DAM Tower", q:"The Butcher Social Club Amsterdam", why:"Kiri's tip for a drink or burger before your swing and Moon", lat:52.3838, lng:4.9010},
+      {t:"eat", e:"🍴", n:"Pllek, NDSM", d:"Free ferry from Centraal, every few mins", q:"Pllek Amsterdam", why:"Kiri's cool outdoor bar across the water, beach chairs on the old shipyard", lat:52.4013, lng:4.8945},
+      {t:"eat", e:"🍴", n:"De Pijp bars", d:"Marie Heinekenplein and around", q:"Marie Heinekenplein Amsterdam", why:"Kiri's bar quarter, with Rayleigh & Ramsay wine bar and Bar Brother for a good Guinness nearby", lat:52.3567, lng:4.8912},
+      {t:"eat", e:"🍴", n:"Waterkant", d:"Canal-side under a car park, young crowd", q:"Waterkant Amsterdam", why:"Surinamese bites and beers right on the water", lat:52.3712, lng:4.8771},
+      {t:"eat", e:"🍴", n:"Cafe de Tuin", d:"Jordaan, near Winkel 43", q:"Cafe de Tuin Amsterdam", why:"A proper traditional Dutch brown cafe, Kiri-approved", lat:52.3778, lng:4.8829},
+      {t:"eat", e:"🍴", n:"Leidseplein", d:"Nightlife square, Bulldog is the tourist classic", q:"Leidseplein Amsterdam", why:"Loads of bars in one square if you want a big night", lat:52.3641, lng:4.8828},
+      {t:"see", e:"✨", n:"Fabrique des Lumieres", d:"Westergasfabriek, check programme + book", q:"Fabrique des Lumieres Amsterdam", why:"Immersive Vermeer and Van Gogh projections filling a former gasworks, Kiri-recommended", lat:52.3860, lng:4.8697},
+      {t:"see", e:"✨", n:"Westerpark + Pacific", d:"Same grounds as Fabrique", q:"Pacific Parc Amsterdam", why:"Kiri's other park, industrial-cool with bars for a beer", lat:52.3866, lng:4.8672}
     ]
   }
 ];
@@ -318,17 +352,20 @@ function showDay(i){
   const rl = document.getElementById('routeLink');
   rl.href = gmapsRoute(day);
   rl.style.background = day.color;
+  rl.style.display = day.extras ? 'none' : '';
 
   layer.clearLayers();
   markers = [];
   const latlngs = day.stops.map(s=>[s.lat,s.lng]);
 
-  L.polyline(latlngs,{color:day.color,weight:3,dashArray:'2 9',opacity:.8}).addTo(layer);
+  if(!day.extras){
+    L.polyline(latlngs,{color:day.color,weight:3,dashArray:'2 9',opacity:.8}).addTo(layer);
+  }
 
   day.stops.forEach((s,idx)=>{
     const icon = L.divIcon({
       className:'',
-      html:`<div class="pin" style="--c:${day.color}"><span>${idx+1}</span></div>`,
+      html:`<div class="pin" style="--c:${day.color}"><span>${s.e||idx+1}</span></div>`,
       iconSize:[30,30], iconAnchor:[15,28], popupAnchor:[0,-26]
     });
     const m = L.marker([s.lat,s.lng],{icon}).addTo(layer);
@@ -355,7 +392,7 @@ function showDay(i){
     const b = document.createElement('button');
     b.className = 'stop';
     b.style.setProperty('--c', day.color);
-    b.innerHTML = `<span class="num">${idx+1}</span>
+    b.innerHTML = `<span class="num">${s.e||idx+1}</span>
       <span class="t">${s.t}</span>
       <span><span class="n">${s.n}</span>${s.book?'<span class="b">book</span>':''}
       ${s.why?`<div class="w">${s.why}</div>`:''}
