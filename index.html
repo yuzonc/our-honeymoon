@@ -110,6 +110,26 @@
   .stop .d{font-size:.76rem;color:var(--soft);line-height:1.35;}
   .stop .b{font-size:.66rem;font-weight:800;color:#7A5200;background:#F6E3B4;
     border-radius:5px;padding:1px 6px;margin-left:5px;vertical-align:1px;}
+  /* overview: one card per day */
+  .daycard{display:flex;gap:11px;align-items:flex-start;width:100%;
+    border:none;border-bottom:1.5px dashed var(--line);
+    background:none;text-align:left;font:inherit;color:inherit;
+    padding:11px 8px;cursor:pointer;}
+  .daycard:last-child{border-bottom:none;}
+  .daycard:active{background:var(--paper);}
+  .daycard .badge{flex:0 0 auto;width:28px;height:28px;border-radius:9px;
+    background:var(--c);color:#FFFDF7;font-weight:800;font-size:.85rem;
+    display:flex;align-items:center;justify-content:center;
+    transform:rotate(-2.5deg);margin-top:1px;}
+  .daycard .dname{font-family:"Caveat",cursive;font-weight:700;
+    font-size:1.2rem;line-height:1.1;color:var(--c);}
+  .daycard .dsum{font-size:.79rem;font-style:italic;line-height:1.35;margin:1px 0;}
+  .daycard .dmeta{font-size:.72rem;color:var(--soft);line-height:1.35;}
+  .daycard .go{margin-left:auto;align-self:center;flex:0 0 auto;
+    font-size:1.1rem;font-weight:700;color:var(--c);padding-left:4px;}
+  /* overview: small stop marker, the numbered pin marks each day's start */
+  .dotpin{width:13px;height:13px;border-radius:50%;background:var(--c);
+    border:2px solid #FFFDF7;box-shadow:0 1px 3px rgba(67,48,31,.35);}
   @media (min-width:760px){
     body{flex-direction:row;flex-wrap:wrap;}
     header,.tabs{width:100%;}
@@ -211,7 +231,7 @@
 
 <header>
   <h1>Amsterdam <span class="heart">♥</span> 18–21 Sep</h1>
-  <p>our little four-day adventure, tap a pin to peek ♪</p>
+  <p>our little four-day adventure, tap a day to dive in ♪</p>
 </header>
 
 <div class="tabs" id="tabs" role="tablist"></div>
@@ -343,9 +363,77 @@ function gmapsRoute(day){
   return `https://www.google.com/maps/dir/${pts}`;
 }
 
+/* days that form the actual itinerary, paired with their index in DAYS */
+const ROUTE_DAYS = DAYS.map((day,i)=>({day,i})).filter(o=>!o.day.extras);
+const OVERVIEW_COLOR = '#8A7256';
+
+function setActiveTab(view){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.view===view));
+}
+
+function dayRange(day){
+  const times = day.stops.map(s=>s.t).filter(t=>/^\d/.test(t));
+  return times.length ? `${times[0]} – ${times[times.length-1]}` : '';
+}
+
+/* all four routes at once, tap anything to open that day */
+function showOverview(){
+  setActiveTab('all');
+  document.getElementById('sheetName').textContent = 'All four days';
+  document.querySelector('#sheetTitle .dot').style.background = OVERVIEW_COLOR;
+  document.getElementById('sheet').style.setProperty('--c', OVERVIEW_COLOR);
+  document.getElementById('routeLink').style.display = 'none';
+
+  layer.clearLayers();
+  markers = [];
+  const bounds = [];
+
+  ROUTE_DAYS.forEach(({day,i},pos)=>{
+    const pts = day.stops.map(s=>[s.lat,s.lng]);
+    L.polyline(pts,{color:day.color,weight:3,dashArray:'2 9',opacity:.75})
+      .addTo(layer)
+      .on('click',()=>showDay(i));
+
+    // label the first stop that is actually in Amsterdam, so the badge sits in view
+    const labelIdx = Math.max(day.stops.findIndex(s=>s.lng>3), 0);
+
+    day.stops.forEach((s,idx)=>{
+      const icon = idx===labelIdx
+        ? L.divIcon({className:'', html:`<div class="pin" style="--c:${day.color}"><span>${pos+1}</span></div>`,
+            iconSize:[30,30], iconAnchor:[15,28]})
+        : L.divIcon({className:'', html:`<div class="dotpin" style="--c:${day.color}"></div>`,
+            iconSize:[13,13], iconAnchor:[6,6]});
+      L.marker([s.lat,s.lng],{icon, title:`${day.name} · ${s.n}`})
+        .addTo(layer)
+        .on('click',()=>showDay(i));
+      if(s.lng>3) bounds.push([s.lat,s.lng]);
+    });
+  });
+
+  map.fitBounds(L.latLngBounds(bounds).pad(0.15));
+
+  const list = document.getElementById('stops');
+  list.innerHTML = '';
+  ROUTE_DAYS.forEach(({day,i},pos)=>{
+    const b = document.createElement('button');
+    b.className = 'daycard';
+    b.style.setProperty('--c', day.color);
+    b.innerHTML = `<span class="badge">${pos+1}</span>
+      <span><span class="dname">${day.name}</span>
+      <div class="dsum">${day.full}</div>
+      <div class="dmeta">${day.stops.length} stops · ${dayRange(day)}</div></span>
+      <span class="go" aria-hidden="true">›</span>`;
+    b.addEventListener('click',()=>showDay(i));
+    list.appendChild(b);
+  });
+
+  list.scrollTop = 0;
+  requestAnimationFrame(()=>{ list.scrollTop = 0; });
+}
+
 function showDay(i){
   const day = DAYS[i];
-  document.querySelectorAll('.tab').forEach((t,k)=>t.classList.toggle('active',k===i));
+  setActiveTab(String(i));
   document.getElementById('sheetName').textContent = day.full;
   document.querySelector('#sheetTitle .dot').style.background = day.color;
   document.getElementById('sheet').style.setProperty('--c', day.color);
@@ -414,10 +502,21 @@ function showDay(i){
 }
 
 const tabs = document.getElementById('tabs');
+
+const allTab = document.createElement('button');
+allTab.className = 'tab';
+allTab.setAttribute('role','tab');
+allTab.dataset.view = 'all';
+allTab.style.setProperty('--c', OVERVIEW_COLOR);
+allTab.innerHTML = `<span class="dot"></span>All days ♥`;
+allTab.addEventListener('click', showOverview);
+tabs.appendChild(allTab);
+
 DAYS.forEach((d,i)=>{
   const b = document.createElement('button');
   b.className = 'tab';
   b.setAttribute('role','tab');
+  b.dataset.view = String(i);
   b.style.setProperty('--c', d.color);
   b.innerHTML = `<span class="dot"></span>${d.name}`;
   b.addEventListener('click',()=>showDay(i));
@@ -431,7 +530,7 @@ document.getElementById('sheetHead').addEventListener('click',(e)=>{
   document.getElementById('chev').textContent = sheet.classList.contains('collapsed')?'▴':'▾';
 });
 
-showDay(0);
+showOverview();
 
 /* ---- cover animation ---- */
 (function(){
