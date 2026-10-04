@@ -22,6 +22,7 @@
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createServer } from 'node:http';
 import { readTrip } from './trip.mjs';
@@ -49,9 +50,10 @@ async function loadChromium() {
       if (c) return c;
     } catch { /* try the next location */ }
   }
+  const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
   console.error(
-    'This script needs Playwright. Install it once, next to the framework:\n' +
-    `  cd ${dirname(new URL('..', import.meta.url).pathname)} && npm install\n` +
+    'This script needs Playwright. Install it once, where package.json lives:\n' +
+    `  cd ${pkgRoot} && npm install\n` +
     'That pulls in Playwright and its Chromium build.'
   );
   process.exit(1);
